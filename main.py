@@ -15,7 +15,7 @@ client = AsyncOpenAI(
 
 # Set up model and config
 model = OpenAIChatCompletionsModel(
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash",
     openai_client=client
 )
 
@@ -41,6 +41,12 @@ job_agent = Agent(
     name="Job Search Agent",
     instructions="Provide 2 simple job search tips for this field. No long explanation.",
     model=model,
+)
+
+career_mentor_agent = Agent(
+    name="Career Mentor Agent",
+    instructions="You are a career mentor agent, your task is to guide users carrer path based on interest",
+    handoffs=[career_agent, skill_agent, job_agent]
 )
 
 # Chat start
